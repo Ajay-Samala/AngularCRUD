@@ -1,0 +1,44 @@
+<mat-card>
+  <span ><img src="../../assets/ico_users.svg" />Users</span>&nbsp;
+  <span ><input type="text" width="300px" [(ngModel)]="searchkey" placeholder="Search" 
+    autocomplete="off" (keyup)="applyFilter()" > </span>&nbsp;
+
+  <div class="btn" style="background:  darkorange;" (click)="AddUser()">
+    <span class="fill-remaining-space-icon">
+      <mat-icon>add</mat-icon>AddUser
+    </span>
+  </div>
+
+</mat-card>
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="listdata"  matSort>
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Email}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="RoleType">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Role Type</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.RoleType}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let element"><img [src]="SelectStatusImage(element)"/>{{element.Status}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Edit">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span class="btn" (click)=Editform(row)><img src="../../../assets/ico_edit.svg" /></span>
+        <span class="btn" (click)=DeleteData(row)><img src="../../../assets/ico_close.svg" /></span>
+      </mat-cell>
+    </ng-container> 
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <!-- <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listdata!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listdata!=null && listdata.data.length==0)}"></mat-footer-row> -->
+  </mat-table>
+
+</div>
